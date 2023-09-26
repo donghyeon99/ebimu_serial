@@ -1,0 +1,22 @@
+<launch>
+    <arg name="imu_port" default="/dev/ttyUSB0" />
+    <arg name="imu_baud_rate" default="921600" />
+    <arg name="imu_rate" default="60" />
+    <arg name="cov_x" default="0.1" />
+    <arg name="cov_y" default="0.1" />
+    <arg name="cov_z" default="0.1" />
+
+    <arg name="robot_num" default="1" />
+
+    <node name="ebimu_serial" pkg="ebimu_serial" type="ebimu_serial" output="screen">
+        <param name="imu_port"      type="str"    value="$(arg imu_port)" />
+        <param name="imu_baud_rate" type="int"    value="$(arg imu_baud_rate)" />
+        <param name="imu_rate"      type="double" value="$(arg imu_rate)" />
+        <param name="covariance/x" type="double" value="$(arg cov_x)" />
+        <param name="covariance/y" type="double" value="$(arg cov_y)" />
+        <param name="covariance/z" type="double" value="$(arg cov_z)" />
+
+        <param name="robot_num" type="int" value="$(arg robot_num)" />
+
+    </node>
+</launch>
