@@ -7,6 +7,7 @@
     <arg name="cov_z" default="0.1" />
 
     <arg name="robot_num" default="1" />
+    <arg name="yawSet"  default="1"/>
 
     <node name="ebimu_serial" pkg="ebimu_serial" type="ebimu_serial" output="screen">
         <param name="imu_port"      type="str"    value="$(arg imu_port)" />
@@ -17,6 +18,7 @@
         <param name="covariance/z" type="double" value="$(arg cov_z)" />
 
         <param name="robot_num" type="int" value="$(arg robot_num)" />
+        <param name="yawSet" type="int" value="$(arg yawSet)" />
 
     </node>
 </launch>
