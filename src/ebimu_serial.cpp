@@ -232,55 +232,53 @@ private:
       past_yaw2 += std::stof(split_data[10]);
       yawSet_ = 0;
     }
+    cout<<"3333333333"<<endl;
 
     yaw1 -= past_yaw1;
     if (yaw1 > 180)
       yaw1 -= 360;
     else if (yaw1 <= -180)
       yaw1 += 360;
+    cout<<"222222"<<endl;
 
     yaw2 -= past_yaw2;
     if (yaw2 > 180)
       yaw2 -= 360;
     else if (yaw2 <= -180)
       yaw2 += 360;
-    cout << "ID: " << std::stof(split_data[7]) << endl;
-    if (std::stof(split_data[0]) == (50 - 0))
-    {
-      nav_msgs::Odometry odomMsg1;
-      odomMsg1.header.stamp = ros::Time::now();
-      odomMsg1.header.frame_id = "odom";
-      odomMsg1.child_frame_id = "base_link_robot1";
-      odomMsg1.twist.twist.angular.x = std::stof(split_data[1]); // imu - roll
-      odomMsg1.twist.twist.angular.y = std::stof(split_data[2]); // imu - pitch
-      odomMsg1.twist.twist.angular.z = yaw1;                     // imu - yaw
-      odomMsg1.twist.twist.linear.x = std::stof(split_data[4]);  // imu - x velocity
-      odomMsg1.twist.twist.linear.y = std::stof(split_data[5]);  // imu - y velocity
-      odomMsg1.twist.twist.linear.z = std::stof(split_data[6]);  // imu - z velocity
+    nav_msgs::Odometry odomMsg1;
+    odomMsg1.header.stamp = ros::Time::now();
+    odomMsg1.header.frame_id = "odom";
+    odomMsg1.child_frame_id = "base_link_robot1";
+    odomMsg1.twist.twist.angular.x = std::stof(split_data[1]); // imu - roll
+    odomMsg1.twist.twist.angular.y = std::stof(split_data[2]); // imu - pitch
+    odomMsg1.twist.twist.angular.z = yaw1;                     // imu - yaw
+    odomMsg1.twist.twist.linear.x = std::stof(split_data[4]);  // imu - x velocity
+    odomMsg1.twist.twist.linear.y = std::stof(split_data[5]);  // imu - y velocity
+    odomMsg1.twist.twist.linear.z = std::stof(split_data[6]);  // imu - z velocity
 
-      ROS_DEBUG_STREAM(odomMsg1.pose.pose);
-      odomMsg1.pose.covariance[0] = cov_x_;
-      odomMsg1.pose.covariance[7] = cov_y_;
-      odomMsg1.pose.covariance[14] = cov_z_;
-      pub1_.publish(odomMsg1);
+    ROS_DEBUG_STREAM(odomMsg1.pose.pose);
+    odomMsg1.pose.covariance[0] = cov_x_;
+    odomMsg1.pose.covariance[7] = cov_y_;
+    odomMsg1.pose.covariance[14] = cov_z_;
+    pub1_.publish(odomMsg1);
 
 
-      nav_msgs::Odometry odomMsg2;
-      odomMsg2.header.stamp = ros::Time::now();
-      odomMsg2.header.frame_id = "odom";
-      odomMsg2.child_frame_id = "base_link_robot2";
-      odomMsg2.twist.twist.angular.x = std::stof(split_data[8]); // imu - roll
-      odomMsg2.twist.twist.angular.y = std::stof(split_data[9]); // imu - pitch
-      odomMsg2.twist.twist.angular.z = yaw2;                     // imu - yaw
-      odomMsg2.twist.twist.linear.x = std::stof(split_data[11]); // imu - x velocity
-      odomMsg2.twist.twist.linear.y = std::stof(split_data[12]); // imu - y velocity
-      odomMsg2.twist.twist.linear.z = std::stof(split_data[13]); // imu - z velocity
-      ROS_DEBUG_STREAM(odomMsg2.pose.pose);
-      odomMsg2.pose.covariance[0] = cov_x_;
-      odomMsg2.pose.covariance[7] = cov_y_;
-      odomMsg2.pose.covariance[14] = cov_z_;
-      pub2_.publish(odomMsg2);
-    }
+    nav_msgs::Odometry odomMsg2;
+    odomMsg2.header.stamp = ros::Time::now();
+    odomMsg2.header.frame_id = "odom";
+    odomMsg2.child_frame_id = "base_link_robot2";
+    odomMsg2.twist.twist.angular.x = std::stof(split_data[8]); // imu - roll
+    odomMsg2.twist.twist.angular.y = std::stof(split_data[9]); // imu - pitch
+    odomMsg2.twist.twist.angular.z = yaw2;                     // imu - yaw
+    odomMsg2.twist.twist.linear.x = std::stof(split_data[11]); // imu - x velocity
+    odomMsg2.twist.twist.linear.y = std::stof(split_data[12]); // imu - y velocity
+    odomMsg2.twist.twist.linear.z = std::stof(split_data[13]); // imu - z velocity
+    ROS_DEBUG_STREAM(odomMsg2.pose.pose);
+    odomMsg2.pose.covariance[0] = cov_x_;
+    odomMsg2.pose.covariance[7] = cov_y_;
+    odomMsg2.pose.covariance[14] = cov_z_;
+    pub2_.publish(odomMsg2);
   }
 
 private:
